@@ -6,7 +6,7 @@
                 <div class="row gy-5">
                     <div
                         class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
-                        <h2>Bienvenidos a <span>PCLA</span></h2>
+                        <h2>Bienvenidos a el Sistema de <span>Prestamo de Llaves</span></h2>
                         <p>Funcionario te damos la bienvenida al Sistema de Préstamo y Control de Llaves de los Ambientes de
                             la Sede TIC SENA.</p>
                         <div class="d-flex justify-content-center justify-content-lg-start">
@@ -146,7 +146,7 @@
                 <div class="row gy-5">
                     <div
                         class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
-                        <h2>Bienvenidos a <span>PCLA</span></h2>
+                        <h2>Bienvenidos a el Sistema de <span>Prestamo de Llaves</span></h2>
                         <p>Funcionario te damos la bienvenida al Sistema de Préstamo y Control de Llaves de los Ambientes de
                             la Sede TIC SENA.</p>
                     </div>
@@ -165,7 +165,7 @@
                         <div class="service-item  position-relative shadow">
                             <div class="icon">
                                 <h3><i class="bi bi-key-fill"></i> Llaves Pendientes por Entregar:</h3>
-                                @if ($estado)
+                                @if ($estado == 1 && !$prestamos)
                                     <p class="fw-semibold fs-5 px-md-3 text-secondary">No tiene llaves pendientes por
                                         entregar, la solicitud de entrega ya fue aceptada.</p>
                                 @endif

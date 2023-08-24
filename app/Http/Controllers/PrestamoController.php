@@ -7,6 +7,7 @@ use App\Models\Historico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class PrestamoController extends Controller
 {
