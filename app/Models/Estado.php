@@ -17,5 +17,5 @@ class Estado extends Model
 
     protected $perPage = 20;
 
-    protected $fillable = ['llave_id','instructor','user_id'];
+    protected $fillable = ['llave_id','instructor','user_id','fecha_prestamo'];
 }

@@ -23,7 +23,8 @@ return new class extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->string('funcionario_prestamo',300);
-            $table->dateTime('fecha_prestamo', 0);
+            $table->string('fecha_prestamo', 200);
+            $table->string('fecha_devolucion', 200);
             $table->timestamps();
         });
     }
