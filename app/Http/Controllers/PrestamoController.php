@@ -30,10 +30,14 @@ class PrestamoController extends Controller
     }
 
     public function store(Request $request){
+        date_default_timezone_set('America/Bogota');
+
         $request->validate([
             'instructor' => 'required',
             'ambiente' => 'required',
         ]);
+
+        $fechaActual = date("d").'/'.date("m").'/'.date("Y").' H:'.date("g").':'.date("i").''.date("a");
 
         $instructor = DB::table('estados')->where('instructor', $request->instructor)->first();
         $llave = DB::table('llaves')->where('id', $request->ambiente_id)->first();
@@ -44,6 +48,7 @@ class PrestamoController extends Controller
                     'llave_id' => $request->ambiente_id,
                     'instructor' => $request->instructor,
                     'user_id' => Auth::user()->id,
+                    'fecha_prestamo' => $fechaActual
                 ]);
     
                 $llaveUpdate = DB::table('llaves')
@@ -108,18 +113,23 @@ class PrestamoController extends Controller
     }
 
     public function cambiarEstado($estado_id){
+        date_default_timezone_set('America/Bogota');
+        
         $prestamos = DB::table('estados')
         ->join('users', 'estados.user_id', '=', 'users.id')
         ->where('estados.id','=',$estado_id)
-        ->select('estados.llave_id', 'estados.instructor', 'users.name', 'estados.created_at')
+        ->select('estados.llave_id', 'estados.instructor', 'users.name', 'estados.fecha_prestamo')
         ->get();
+
+        $fechaActual = date("d").'/'.date("m").'/'.date("Y").' H:'.date("g").':'.date("i").''.date("a");
 
         Historico::create([
             'llave_id' => $prestamos[0]->llave_id,
             'instructor' => $prestamos[0]->instructor,
             'user_id' => Auth::user()->id,
             'funcionario_prestamo' => $prestamos[0]->name,
-            'fecha_prestamo' => $prestamos[0]->created_at,
+            'fecha_prestamo' => $prestamos[0]->fecha_prestamo,
+            'fecha_devolucion' => $fechaActual
         ]);
 
         $ubicacion = session('rol') == 'vigilante' ? 'PORTERIA' : 'COORDINACIÓN'; 
@@ -157,7 +167,7 @@ class PrestamoController extends Controller
         ->join('users', 'historicos.user_id', '=', 'users.id')
         ->join('llaves', 'historicos.llave_id', '=', 'llaves.id')
         ->join('ambientes', 'llaves.ambiente_id', '=', 'ambientes.id')
-        ->select('historicos.instructor', 'ambientes.ambiente', 'llaves.ubicacion', 'historicos.funcionario_prestamo', 'historicos.fecha_prestamo', 'historicos.created_at', 'users.name')
+        ->select('historicos.instructor', 'ambientes.ambiente', 'llaves.ubicacion', 'historicos.funcionario_prestamo', 'historicos.fecha_prestamo', 'historicos.fecha_devolucion', 'users.name')
         ->get();
 
         return view('historial', ['historial' => $historial]);

@@ -87,7 +87,7 @@
                                                 <td>{{ $prestamo->ubicacion }}</td>
                                                 @if ($prestamo->estado == 'PENDIENTE')
                                                     <td><button type="button"
-                                                            class="btn btn-sm btn-light shadow-sm fw-semibold"
+                                                            class="btn btn-sm btn-secondary shadow-sm fw-semibold"
                                                             onclick="cambiarEstado({{ $prestamo->id }});">{{ $prestamo->estado }}
                                                             <i class="bi bi-key-fill"></i></button></td>
                                                 @else

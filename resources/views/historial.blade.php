@@ -38,7 +38,7 @@
                                     <td>{{$historico->funcionario_prestamo}}</td>
                                     <td>{{$historico->fecha_prestamo}}</td>
                                     <td>{{$historico->name}}</td>
-                                    <td>{{$historico->created_at}}</td>
+                                    <td>{{$historico->fecha_devolucion}}</td>
                                </tr>
                             @endforeach
                         </tbody>
